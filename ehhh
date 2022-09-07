@@ -1,3 +1,5 @@
+-- credit to LiquidHubMain
+
 loadstring("loadstring("local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua", true))()
 local Window = Library.CreateLib("Slime hunter", "GrapeTheme")
