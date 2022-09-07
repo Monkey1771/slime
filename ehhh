@@ -1,0 +1,129 @@
+loadstring("loadstring("local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua", true))()
+local Window = Library.CreateLib("Slime hunter", "GrapeTheme")
+
+local Tabmain = Window:NewTab("Auto Stuff")
+local Tabbuy = Window:NewTab("Buy Stuff")
+local Tabmisc = Window:NewTab("Misc")
+local Tabcredits = Window:NewTab("Credits")
+
+local Sectionmain = Tabmain:NewSection("Auto Stuff")
+local Sectionbuy = Tabbuy:NewSection("Buy Stuff")
+local Sectionmisc = Tabmisc:NewSection("Misc")
+local Sectioncredits = Tabcredits:NewSection("Credits")
+Sectioncredits:NewLabel("Owner - ironic#6908")
+Sectioncredits:NewLabel("Scripting - ironic#6908")
+Sectioncredits:NewLabel("UI - Kavo UI Lib")
+
+Sectionmisc:NewSlider("WalkSpeed", "Change your walkspeed 16-500", 500, 16, function(currentspeedvalue) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = currentspeedvalue
+end)
+
+Sectionmisc:NewSlider("JumpPower", "Change your jumppower 50-500", 500, 50, function(currentjumpvalue) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = currentjumpvalue
+end)
+
+Sectionmisc:NewSlider("Hipheight", "Change your hipheight 0-100", 100, 0, function(currenthipheightvalue) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.HipHeight = currenthipheightvalue
+end)
+
+Sectionbuy:NewButton("Buy 1 Slime", "Buys 1 Slime", function()
+    local args = {
+        [1] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))
+    wait(0.3)
+    Notification.new("success", "Sucess", "Succesfully bought") 
+end)
+
+Sectionbuy:NewButton("Buy 5 Slimes", "Buys 5 Slimes", function()
+    local args = {
+        [1] = 5
+    }
+    
+    game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))    
+    wait(0.3)
+    Notification.new("success", "Sucess", "Succesfully bought") 
+end)
+
+Sectionbuy:NewButton("Buy SellRate", "Buys SellRate once (auto is in auto tab)", function()
+    local args = {
+        [1] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuySpeed:FireServer(unpack(args))     
+    wait(0.3)
+    Notification.new("success", "Sucess", "Succesfully bought") 
+end)
+
+Sectionbuy:NewButton("Merge", "Merges once (auto is in auto tab)", function()
+    local args = {
+        [1] = 5
+    }
+    
+    game:GetService("ReplicatedStorage").GTycoonClient.Remotes.MergeDroppers:FireServer()   
+    wait(0.3)
+    Notification.new("success", "Sucess", "Sucessfully Merged") 
+end)
+
+Sectionmain:NewButton("Collect all droplets", "collects all droplets", function()
+    for i,v in pairs(game.Workspace.Drops:GetChildren()) do
+        v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end
+    wait(0.3)
+    Notification.new("info", "READ ME", "Jump to collect.")
+end)
+
+Sectionmain:NewToggle("Auto Deposit", "Auto Sells", function(state)
+    if state then
+        _G.autodeposit = true
+        wait(0.3)
+        Notification.new("success", "Sucess", "Started Auto Depositing") 
+        while _G.autodeposit == true do
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.DepositDrops:FireServer()
+            wait(0.1)
+        end
+    else
+        _G.autodeposit = false
+        wait(0.3)
+        Notification.new("success", "Sucess", "Stopped Auto Depositing") 
+    end
+end)
+
+Sectionmain:NewToggle("Auto Merge", "Auto Merges", function(state)
+    if state then
+        _G.automerge = true
+        wait(0.3)
+        Notification.new("success", "Sucess", "Started Auto Merging") 
+        while _G.automerge == true do
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.MergeDroppers:FireServer()
+            wait(0.1)
+        end
+    else
+        _G.automerge = false
+        wait(0.3)
+        Notification.new("success", "Sucess", "Stopped Auto Merging") 
+    end
+end)
+
+Sectionmain:NewToggle("Auto Buy SellRate", "Auto Buys Sell Speed", function(state)
+    if state then
+        _G.autobuysellrate = true
+        wait(0.3)
+        Notification.new("success", "Sucess", "Started Buying SellRate") 
+        while _G.autobuysellrate == true do
+            local args = {
+                [1] = 1
+            }
+            
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuySpeed:FireServer(unpack(args))            
+            wait(0.1)
+        end
+    else
+        _G.autobuysellrate = false
+        wait(0.3)
+        Notification.new("success", "Sucess", "Stopped Buying SellRate") 
+    end
+end)
+")()
